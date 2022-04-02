@@ -10,7 +10,7 @@ package simuladorprocesos2;
  * @author Roberto Toledo Sanchez
  */
 public class Memoria {
-    public String[] localidades = new String[2048];
+    public String[] localidades = new String[1024];
     public int capacidad ;
 
     public Memoria() {
@@ -39,6 +39,14 @@ public class Memoria {
     public void llenarMem(){
         for(int i=0;i<2048;i++)
             this.localidades[i]=null;          
+    }
+    
+    public void estado_de_la_memoria(){
+        
+    }
+    
+    public void desfragmentar_memoria(){
+    
     }
 
 } 
