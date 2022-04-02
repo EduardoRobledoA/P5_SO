@@ -37,15 +37,42 @@ public class Memoria {
     }
     
     public void llenarMem(){
-        for(int i=0;i<2048;i++)
+        for(int i=0;i<1024;i++)
             this.localidades[i]=null;          
     }
-    
+    /*
+     * Nueva funcion. Lista ligada de procesos y huecos
+     * 
+     */
     public void estado_de_la_memoria(){
         
     }
     
+    /*
+     * Nueva funcion. Desfragmentacion y muestra de la lista ligada de procesos y huecos.
+     * 
+     */
     public void desfragmentar_memoria(){
+
+        int j=0;
+        int registro_base_null;
+
+        for (int i = 0; i < capacidad; i++) {
+
+            //if (i==0) {
+            //    if (localidades[i] == null) {
+            //        registro_base_null = 0;
+            //    }
+            //}
+
+            j++;
+            if (j==16) {
+                j=0;
+                System.out.println(i);
+                System.out.println();
+                System.out.println(i+1);
+            }
+        }
     
     }
 

@@ -105,7 +105,12 @@ public class CrearProceso {
         else if(inst>25)
             proceso.setMemoria(512);   
     }
-    
+
+    /*
+     * Modificacion funcion
+     * 
+     */
+
     public void insercionProceso(Memoria memoria, Proceso proceso){
         int i=0;
         int j;
