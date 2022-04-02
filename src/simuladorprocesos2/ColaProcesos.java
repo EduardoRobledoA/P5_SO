@@ -80,11 +80,6 @@ public class ColaProcesos {
             System.out.println();
         
         }
-            
-        System.out.println("\n ----------------------- Estado de la Memoria -----------------------");
-        System.out.println("Localidades           Proceso");
-        for(i=0;i<2048;i++)
-            System.out.println(i+"                     "+memoria.localidades[i]);
 
     }
 

@@ -18,7 +18,7 @@ public class SimuladorProcesos2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Memoria RAM = new Memoria(2048);
+        Memoria RAM = new Memoria(1024);
         RAM.llenarMem();
         ColaProcesos QUEUE = new ColaProcesos();
         Scanner sn = new Scanner(System.in);
