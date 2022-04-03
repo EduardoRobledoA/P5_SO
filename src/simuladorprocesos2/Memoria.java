@@ -57,7 +57,7 @@ public class Memoria {
         int j=0;
         int registro_base_null;
 
-        for (int i = 0; i < capacidad; i++) {
+        for (int i = 0; i < 1024; i++) {
 
             //if (i==0) {
             //    if (localidades[i] == null) {

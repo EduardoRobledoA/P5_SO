@@ -112,6 +112,7 @@ public class CrearProceso {
      */
 
     public void insercionProceso(Memoria memoria, Proceso proceso){
+        /*
         int i=0;
         int j;
         while(memoria.localidades[i] !=null)
@@ -122,6 +123,25 @@ public class CrearProceso {
         proceso.setDirLimite(limite);
         for(j=base;j<=limite;j++)
             memoria.localidades[j]=proceso.getNombre();
+        */
+        
+        int j=0;
+        int registro_base_null;
+
+        for (int i = 0; i < 1024; i++) {
+
+            if (i==0) {
+                if (memoria.localidades[i] == null) {
+                    
+                }
+            }
+
+            j++;
+            if (j==17) {
+                j=0;
+                System.out.println(i);
+            }
+        }
     }
     
     public boolean validacionMemoria(Memoria memoria, Proceso proceso){
