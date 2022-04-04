@@ -19,7 +19,8 @@ public class SimuladorProcesos2 {
      */
     public static void main(String[] args) {
         Memoria RAM = new Memoria(1024);
-        RAM.llenarMem();
+        //RAM.llenarMem();
+        RAM.llenarMarcos();
         ColaProcesos QUEUE = new ColaProcesos();
         Scanner sn = new Scanner(System.in);
         boolean salir = false;
@@ -107,3 +108,4 @@ public class SimuladorProcesos2 {
     }
     
 }
+
