@@ -29,7 +29,7 @@ public class ColaProcesos {
      *
      * @param memoria
      */
-    public void estado_actual_sistema(Memoria memoria) {
+    public void estado_de_los_procesos(Memoria memoria) {
         System.out.println("\n >>>>Memoria Disponible:"+memoria.getCapacidad());
         System.out.println("\n >>>> Número de procesos listos:"+ NuevaColaProcesos.size());
 

@@ -47,5 +47,13 @@ public class Memoria {
         for(int i=0;i<64;i++)
             this.marcos[i]=null;          
     }
+    
+    public void estado_de_la_memoria(){
+    
+   }
+    
+   public void desfragmentar_memoria(){
+       
+   }
 
 } 

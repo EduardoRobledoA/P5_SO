@@ -30,13 +30,15 @@ public class SimuladorProcesos2 {
  
             System.out.println("------------------------- SIMULADOR DE PROCESOS Y MEMORIA -------------------------");
             System.out.println("1. Crear Proceso nuevo");
-            System.out.println("2. Ver estado actual del sistema");
-            System.out.println("3. Imprimir cola de procesos");
-            System.out.println("4. Ver proceso actual");
-            System.out.println("5. Ejecutar proceso actual");
-            System.out.println("6. Pasar al proceso siguiente");
-            System.out.println("7. Matar proceso actual");
-            System.out.println("8. Salir del programa");
+            System.out.println("2. Ver estado de los procesos");
+            System.out.println("3. Ver estado de la memoria");
+            System.out.println("4. Imprimir cola de procesos");
+            System.out.println("5. Ver proceso actual");
+            System.out.println("6. Ejecutar proceso actual");
+            System.out.println("7. Pasar al proceso siguiente");
+            System.out.println("8. Matar proceso actual");
+            System.out.println("9. Desfragmentar memoria");
+            System.out.println("10. Salir del programa");
  
             try {
  
@@ -54,34 +56,44 @@ public class SimuladorProcesos2 {
 
                     case 2:
                         System.out.println("Has seleccionado la opcion 2");
-                        QUEUE.estado_actual_sistema(RAM);
+                        QUEUE.estado_de_los_procesos(RAM);
                         break;
-
+                        
                     case 3:
                         System.out.println("Has seleccionado la opcion 3");
-                        QUEUE.imprimir_cola_procesos();
+                        RAM.estado_de_la_memoria();
                         break;
+                        
                     case 4:
                         System.out.println("Has seleccionado la opcion 4");
-                        QUEUE.ver_proceso_actual();
+                        QUEUE.imprimir_cola_procesos();
                         break;
-
                     case 5:
                         System.out.println("Has seleccionado la opcion 5");
-                        QUEUE.ejecutar_proceso_actual(RAM);
+                        QUEUE.ver_proceso_actual();
                         break;
 
                     case 6:
                         System.out.println("Has seleccionado la opcion 6");
-                        QUEUE.pasar_proceso_siguiente();
+                        QUEUE.ejecutar_proceso_actual(RAM);
                         break;
 
                     case 7:
                         System.out.println("Has seleccionado la opcion 7");
-                        QUEUE.matar_proceso_actual(RAM);
+                        QUEUE.pasar_proceso_siguiente();
                         break;
 
                     case 8:
+                        System.out.println("Has seleccionado la opcion 8");
+                        QUEUE.matar_proceso_actual(RAM);
+                        break;
+                        
+                    case 9:
+                        System.out.println("Has seleccionado la opcion 9");
+                        RAM.desfragmentar_memoria();
+                        break;
+                    
+                    case 10:
                         salir = true;
                         break;
                         
@@ -96,3 +108,4 @@ public class SimuladorProcesos2 {
     }
     
 }
+
