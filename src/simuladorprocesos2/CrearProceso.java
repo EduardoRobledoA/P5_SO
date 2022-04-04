@@ -59,6 +59,7 @@ public class CrearProceso {
             System.out.println("\nid: "+proceso.getId_Proc());
             System.out.println("# instrucciones: "+proceso.getNo_Instrucciones()); 
             System.out.println("Memoria ocupada: "+proceso.getMemoria());
+            System.out.println("Numero de paginas: "+proceso.getNoPaginas());
             System.out.println("Memoria disponible actualizada: "+memoria.getCapacidad()+"\n");
             return proceso;
         }
@@ -104,19 +105,30 @@ public class CrearProceso {
             proceso.setMemoria(256);
         else if(inst>25)
             proceso.setMemoria(512);   
+        
+        proceso.setNoPaginas(proceso.getMemoria()/16);
     }
+        
     
     public void insercionProceso(Memoria memoria, Proceso proceso){
-        int i=0;
-        int j;
-        while(memoria.localidades[i] !=null)
-            i++;
-        int base = i;
-        int limite =base+proceso.getMemoria()-1;
-        proceso.setDirBase(base);
-        proceso.setDirLimite(limite);
-        for(j=base;j<=limite;j++)
-            memoria.localidades[j]=proceso.getNombre();
+        int i,w;
+        int j=0;
+        int noPaginas = proceso.getNoPaginas();
+        proceso.setTabla_paginas(new int[proceso.noPaginas]);
+        
+        for(i=0;i<noPaginas;i++){
+            while(memoria.marcos[j] !=null)
+                j++;
+            proceso.tabla_paginas[i] = j;
+            memoria.marcos[j]="Page "+ i +proceso.getNombre(); 
+            
+            /*
+            for(w=j*16;w<(j*16)+16;w++)
+                memoria.localidades[w]=proceso.getNombre();
+
+            */
+                
+        }       
     }
     
     public boolean validacionMemoria(Memoria memoria, Proceso proceso){

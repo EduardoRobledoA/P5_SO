@@ -15,6 +15,8 @@ public class Proceso {
     int no_InstuccionesEjecutadas = 0;
     int dirBase;
     int dirLimite;
+    public int[] tabla_paginas;
+    public int noPaginas;
             
     public Proceso() {
     }
@@ -79,6 +81,20 @@ public class Proceso {
     public void setDirLimite(int dirLimite) {
         this.dirLimite = dirLimite;
     }
+
+    public int getNoPaginas() {
+        return noPaginas;
+    }
+
+    public void setNoPaginas(int noPaginas) {
+        this.noPaginas = noPaginas;
+    }
+
+    public void setTabla_paginas(int[] tabla_paginas) {
+        this.tabla_paginas = tabla_paginas;
+    }
+    
+    
     
     
 }

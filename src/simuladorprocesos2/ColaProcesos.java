@@ -82,9 +82,9 @@ public class ColaProcesos {
         }
             
         System.out.println("\n ----------------------- Estado de la Memoria -----------------------");
-        System.out.println("Localidades           Proceso");
-        for(i=0;i<2048;i++)
-            System.out.println(i+"                     "+memoria.localidades[i]);
+        System.out.println("Marco           Pagina");
+        for(i=0;i<64;i++)
+            System.out.println(i+"                     "+memoria.marcos[i]);
 
     }
 
@@ -175,11 +175,12 @@ public class ColaProcesos {
                 int memLib = temporal.getMemoria();
                 memoria.setCapacidad(memLib + memoria.getCapacidad());
                 
+                /*
                 int base = temporal.getDirBase();
                 int limite = temporal.getDirLimite();   
                 for(i=base;i<limite;i++)
                     memoria.localidades[i]=null;
-                
+                */
                 ColaProcesosFinalizados.add(temporal);
                 System.out.println("\n >>>> El proceso ha concluido su ejecución\n");
 
@@ -252,7 +253,7 @@ public class ColaProcesos {
      */
     public void matar_proceso_actual(Memoria memoria){
 
-        int i;
+        int i,j,aux;
         if (NuevaColaProcesos.size()==0) {
                 System.out.println("\n >>>>>>> No hay procesos preparados \n");
         } else {
@@ -272,11 +273,26 @@ public class ColaProcesos {
             int memLib = temporal.getMemoria();
             memoria.setCapacidad(memLib + memoria.getCapacidad());
             
+            for(int marco : temporal.tabla_paginas){
+                memoria.marcos[marco] = null;
+            }
+                
+            /*
+            for(i=0;i<temporal.noPaginas;i++){
+                System.out.println("");
+                aux = temporal.tabla_paginas[i];
+                for(j=aux*16;j<(aux*16)+16;j++)
+                    memoria.localidades[j]=null;
+            }
+            */
+            temporal.tabla_paginas=null;
+            
+            /*
             int base = temporal.getDirBase();
             int limite = temporal.getDirLimite();   
             for(i=base;i<limite;i++)
                 memoria.localidades[i]=null;
-            
+            */
             System.out.println("  Nombre: "+temporal.getNombre()+"\n"+"  ID unico: "+temporal.getId_Proc()+"\n"
             +"  Instrucciones totales: "+temporal.getNo_Instrucciones()+"\n"
             +"  Instrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n"
