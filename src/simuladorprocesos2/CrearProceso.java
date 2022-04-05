@@ -120,7 +120,7 @@ public class CrearProceso {
             while(memoria.marcos[j] !=null)
                 j++;
             proceso.tabla_paginas[i] = j;
-            memoria.marcos[j]="Page "+ i +proceso.getNombre(); 
+            memoria.marcos[j]=proceso.getNombre()+" - Page "+ i ; 
             
             /*
             for(w=j*16;w<(j*16)+16;w++)
