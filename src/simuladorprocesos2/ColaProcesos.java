@@ -5,7 +5,7 @@
 package simuladorprocesos2;
 
 import java.util.*;
-import simuladorprocesos2.Memoria;
+//import simuladorprocesos2.Memoria;
 /**
  *
  * @author Eduardo Robledo Aguirre
@@ -13,9 +13,75 @@ import simuladorprocesos2.Memoria;
  */
 public class ColaProcesos {
 
-    LinkedList<Proceso> NuevaColaProcesos = new LinkedList();
-    LinkedList<Proceso> ColaProcesosFinalizados = new LinkedList();
-    LinkedList<Proceso> ColaProcesosEliminados = new LinkedList();
+   
+    LinkedList<Proceso> NuevaColaProcesos = new LinkedList<>();
+    LinkedList<Proceso> ColaProcesosFinalizados = new LinkedList<>();
+    LinkedList<Proceso> ColaProcesosEliminados = new LinkedList<>();
+    int[][] frames_pages = {
+        {0,15},
+        {16,31},
+        {32,47},
+        {48,63},
+        {64,79},
+        {80,95},
+        {96,111},
+        {112,127},
+        {128,143},
+        {144,159},
+        {160,175},
+        {176,191},
+        {192,207},
+        {208,223},
+        {224,239},
+        {240,255},
+        {256,271},
+        {272,287},
+        {288,303},
+        {304,319},
+        {320,335},
+        {336,351},
+        {352,367},
+        {368,383},
+        {384,399},
+        {400,415},
+        {416,431},
+        {432,447},
+        {448,463},
+        {464,479},
+        {480,495},
+        {496,511},
+        {512,527},
+        {528,543},
+        {544,559},
+        {560,575},
+        {576,591},
+        {592,607},
+        {608,623},
+        {624,639},
+        {640,655},
+        {656,671},
+        {672,687},
+        {688,703},
+        {704,719},
+        {720,735},
+        {736,751},
+        {752,767},
+        {768,783},
+        {784,799},
+        {800,815},
+        {816,831},
+        {832,847},
+        {848,863},
+        {864,879},
+        {880,895},
+        {896,911},
+        {912,927},
+        {928,943},
+        {944,959},
+        {960,975},
+        {976,991},
+        {992,1007},
+        {1008,1023} };
 
     /**
      *
@@ -122,7 +188,7 @@ public class ColaProcesos {
      *
      */
     public void ver_proceso_actual(){
-        
+        int i,aux;
         if (NuevaColaProcesos.size()==0) {
             System.out.println("\n >>>>>>> No hay procesos preparados \n");
         } else {
@@ -132,7 +198,12 @@ public class ColaProcesos {
             +"  Instrucciones totales: "+temporal.getNo_Instrucciones()+"\n"
             +"  Instrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n"
             +"  Espacio ocupado: "+temporal.getMemoria()+"\n"        
-            +"  Direcciones de memoria asignadas: "+temporal.getDirBase()+"-"+temporal.getDirLimite()+"\n");
+            +"  Direcciones de memoria asignadas: \n"
+            +"  PAGE    FRAME   {BASE - LIMIT}");
+            for (i = 0; i < temporal.getNoPaginas(); i++) {
+                aux = temporal.tabla_paginas[i];
+                System.out.println("  "+i+"       "+aux+"        "+frames_pages[aux][0]+" - "+frames_pages[aux][1]);
+            }
         }
 
     }
@@ -143,7 +214,7 @@ public class ColaProcesos {
      */
     public void ejecutar_proceso_actual(Memoria memoria){
 
-        int i;
+        int i,aux;
         if (NuevaColaProcesos.size()==0) {
             System.out.println("\n >>>>>>> No hay procesos preparados \n");
         } else {
@@ -154,7 +225,12 @@ public class ColaProcesos {
             +"  Instrucciones totales: "+temporal.getNo_Instrucciones()+"\n"
             +"  Instrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n"
             +"  Espacio ocupado: "+temporal.getMemoria()+"\n"        
-            +"  Direcciones de memoria asignadas: "+temporal.getDirBase()+"-"+temporal.getDirLimite()+"\n");
+            +"  Direcciones de memoria asignadas: \n"
+            +"  PAGE    FRAME   {BASE - LIMIT}");
+            for (i = 0; i < temporal.getNoPaginas(); i++) {
+                aux = temporal.tabla_paginas[i];
+                System.out.println("  "+i+"       "+aux+"        "+frames_pages[aux][0]+" - "+frames_pages[aux][1]);
+            }            
 
             System.out.println("\n >>>> Ejecutando proceso actual\n");
             for(i=0;i<3;i++){
@@ -199,8 +275,12 @@ public class ColaProcesos {
                 +"  Instrucciones restantes: "+temporal.getNo_Instrucciones()+"\n"
                 +"  Instrucciones que se ejecutaron: 5\n"
                 +"  Espacio ocupado: "+temporal.getMemoria()+"\n"        
-                +"  Direcciones de memoria asignadas: "+temporal.getDirBase()+"-"+temporal.getDirLimite()+"\n");
-
+                +"  Direcciones de memoria asignadas: \n"
+                +"  PAGE    FRAME   {BASE - LIMIT}");
+                for (i = 0; i < temporal.getNoPaginas(); i++) {
+                    aux = temporal.tabla_paginas[i];
+                    System.out.println("  "+i+"       "+aux+"        "+frames_pages[aux][0]+" - "+frames_pages[aux][1]);
+                }                
             }
 
         }
@@ -212,7 +292,7 @@ public class ColaProcesos {
      */
     public void pasar_proceso_siguiente(){
         
-        int i;
+        int i,aux;
         if (NuevaColaProcesos.size()==0) {
             System.out.println("\n >>>>>>> No hay procesos preparados \n");
         } else {
@@ -223,7 +303,12 @@ public class ColaProcesos {
             +"  Instrucciones totales: "+temporal.getNo_Instrucciones()+"\n"
             +"  Instrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n"
             +"  Espacio ocupado: "+temporal.getMemoria()+"\n"        
-            +"  Direcciones de memoria asignadas: "+temporal.getDirBase()+"-"+temporal.getDirLimite()+"\n");
+            +"  Direcciones de memoria asignadas: \n"
+            +"  PAGE    FRAME   {BASE - LIMIT}");
+            for (i = 0; i < temporal.getNoPaginas(); i++) {
+                aux = temporal.tabla_paginas[i];
+                System.out.println("  "+i+"       "+aux+"        "+frames_pages[aux][0]+" - "+frames_pages[aux][1]);
+            }            
 
             System.out.println("\n >>>> Pasando al siguiente proceso\n");
             for(i=0;i<3;i++){
@@ -242,7 +327,12 @@ public class ColaProcesos {
             +"  Instrucciones totales: "+temporal.getNo_Instrucciones()+"\n"
             +"  Instrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n"
             +"  Espacio ocupado: "+temporal.getMemoria()+"\n"        
-            +"  Direcciones de memoria asignadas: "+temporal.getDirBase()+"-"+temporal.getDirLimite()+"\n");
+            +"  Direcciones de memoria asignadas: \n"
+            +"  PAGE    FRAME   {BASE - LIMIT}");
+            for (i = 0; i < temporal.getNoPaginas(); i++) {
+                aux = temporal.tabla_paginas[i];
+                System.out.println("  "+i+"       "+aux+"        "+frames_pages[aux][0]+" - "+frames_pages[aux][1]);
+            }
 
         }
     }
@@ -253,7 +343,7 @@ public class ColaProcesos {
      */
     public void matar_proceso_actual(Memoria memoria){
 
-        int i,j,aux;
+        int i;
         if (NuevaColaProcesos.size()==0) {
                 System.out.println("\n >>>>>>> No hay procesos preparados \n");
         } else {
@@ -297,7 +387,10 @@ public class ColaProcesos {
             +"  Instrucciones totales: "+temporal.getNo_Instrucciones()+"\n"
             +"  Instrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n"
             +"  Espacio ocupado: "+temporal.getMemoria()+"\n"
-            +"  Direcciones de memoria asignadas: "+temporal.getDirBase()+"-"+temporal.getDirLimite()+"\n");
+            +"  Direcciones de memoria asignadas: \n"
+            +"  PAGE    FRAME   {BASE - LIMIT}\n"
+            +"  null    null     null - null");    
+                        
             ColaProcesosEliminados.add(temporal);
 
         }

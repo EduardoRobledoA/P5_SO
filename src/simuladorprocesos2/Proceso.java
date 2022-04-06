@@ -1,6 +1,6 @@
 package simuladorprocesos2;
 
-import simuladorprocesos2.CrearProceso;
+//import simuladorprocesos2.CrearProceso;
 
 /**
  *
@@ -13,8 +13,7 @@ public class Proceso {
     String nombre;
     int no_Instrucciones;
     int no_InstuccionesEjecutadas = 0;
-    int dirBase;
-    int dirLimite;
+    
     public int[] tabla_paginas;
     public int noPaginas;
             
@@ -64,22 +63,6 @@ public class Proceso {
 
     public void setNo_InstruccionesEjecutadas(int no_Instrucciones) {
         this.no_InstuccionesEjecutadas = no_Instrucciones;
-    }
-
-    public int getDirBase() {
-        return dirBase;
-    }
-
-    public void setDirBase(int dirBase) {
-        this.dirBase = dirBase;
-    }
-
-    public int getDirLimite() {
-        return dirLimite;
-    }
-
-    public void setDirLimite(int dirLimite) {
-        this.dirLimite = dirLimite;
     }
 
     public int getNoPaginas() {

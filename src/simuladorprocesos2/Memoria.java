@@ -84,26 +84,84 @@ public class Memoria {
      * Nueva funcion. Desfragmentacion y muestra de la lista ligada de procesos y huecos.
      * 
     */ 
-    public void desfragmentar_memoria() {
+    public void desfragmentar_memoria(ColaProcesos mainqueue) {
         int j=0;
-        //int registro_base_null;
+        int i;
+        int frame_null;
 
-        for (int i = 0; i < 1024; i++) {
-
-            //if (i==0) {
-            //    if (localidades[i] == null) {
-            //        registro_base_null = 0;
-            //    }
-            //}
-
-            j++;
-            if (j==16) {
-                j=0;
-                System.out.println(i);
-                System.out.println();
-                System.out.println(i+1);
+        System.out.println("\n >>>> Desfragmentando memoria\n");
+        for(int z=0;z<3;z++){
+            System.out.println("..." );
+            try {
+                Thread.sleep(550);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
         }
+
+        if (mainqueue.NuevaColaProcesos.size()==0) {
+            System.out.println("\n >>>>>>> No hay procesos en memoria \n");
+        } else {
+            
+            for(i=0;i<64;i++){
+
+                if (marcos[i]==null) {
+                    frame_null = i;
+                    for (int k = (i+1); k < 64; k++) {
+                        if (marcos[k]!=null) {
+                            System.out.println(marcos[k]);
+                            String string = marcos[k];
+                            String[] parts = string.split(" - ");
+                            // String[] parts = marcos[k].split(" - ");
+                            String nombre_proceso = parts[0]; // 123
+                            
+                            String pagina = parts[1]; // 654321
+                            String[] parts2 = pagina.split("Page ");
+                            String numero_pagina = parts2[1];
+                            int num = Integer.parseInt(numero_pagina);
+                            
+                            for (Proceso temporal : mainqueue.NuevaColaProcesos) {
+                
+                                if (nombre_proceso==temporal.getNombre()) {
+                                    temporal.tabla_paginas[num]=frame_null;
+                                    marcos[frame_null]=temporal.getNombre()+" - Page "+num;
+                                    marcos[k]=null;
+                                    break;
+                                }
+                
+                            }
+                            break;
+                        }
+                        
+                    }
+                }                  
+            } 
+       
+            System.out.println("\n ----------------------- NUEVA LISTA LIGADA DE PROCESOS Y HUECOS -----------------------\n");
+            System.out.println("| PROCESO/HUECO | DIRECCION BASE DE LA PAGINA | LONGITUD |---|---> \n");
+            j = 0;
+            for(i=0;i<64;i++){
+
+                switch (i) {
+                    case 0:
+                        System.out.println("    | "+marcos[i]+" |"+"| 0 | 16 |---|---");
+                        j = j+16;
+                        break;
+
+                    case 63:
+                        System.out.println("--->| "+marcos[i]+" |"+"| "+j+"| 16 | X |");
+                        break;
+            
+                    default:
+                        System.out.println("--->| "+marcos[i]+" |"+"| "+j+" | 16 |---|---");
+                        j = j+16;
+                        break;
+                }      
+            
+            }   
+
+        }
+
     }
 } 
 

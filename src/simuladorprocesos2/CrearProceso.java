@@ -40,6 +40,7 @@ public class CrearProceso {
         System.out.println("Ingrese el nombre del proceso: ");
         nombre = teclado.nextLine();
         proceso.setNombre(nombre);
+        
        
         System.out.println("\n");
         for(i=0;i<3;i++){
@@ -63,6 +64,7 @@ public class CrearProceso {
             System.out.println("Memoria disponible actualizada: "+memoria.getCapacidad()+"\n");
             return proceso;
         }
+        
         return null;
     }
     
@@ -111,7 +113,7 @@ public class CrearProceso {
         
     
     public void insercionProceso(Memoria memoria, Proceso proceso){
-        int i,w;
+        int i;
         int j=0;
         int noPaginas = proceso.getNoPaginas();
         proceso.setTabla_paginas(new int[proceso.noPaginas]);
@@ -120,7 +122,7 @@ public class CrearProceso {
             while(memoria.marcos[j] !=null)
                 j++;
             proceso.tabla_paginas[i] = j;
-            memoria.marcos[j]=proceso.getNombre()+" - Page "+ i ; 
+            memoria.marcos[j]=proceso.getNombre()+" - Page "+i; 
             
             /*
             for(w=j*16;w<(j*16)+16;w++)
