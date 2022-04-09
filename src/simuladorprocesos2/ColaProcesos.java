@@ -107,12 +107,12 @@ public class ColaProcesos {
             for (Proceso temporal : ColaProcesosFinalizados) {
                 
                 if (i==1) {
-                    System.out.println(i+"->\tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
+                    System.out.println(i+"  \tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
                     +"\n\tInstrucciones pendientes: "+temporal.getNo_Instrucciones()
                     +"\n\tInstrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n");
                     i++;
                 } else {
-                    System.out.println(i+"->\tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
+                    System.out.println("->"+i+"\tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
                     +"\n\tInstrucciones pendientes: "+temporal.getNo_Instrucciones()
                     +"\n\tInstrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n");
                     i++;
@@ -131,12 +131,12 @@ public class ColaProcesos {
             for (Proceso temporal : ColaProcesosEliminados) {
                 
                 if (i==1) {
-                    System.out.println(i+"->\tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
+                    System.out.println(i+"  \tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
                     +"\n\tInstrucciones pendientes: "+temporal.getNo_Instrucciones()
                     +"\n\tInstrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n");
                     i++;
                 } else {
-                    System.out.println(i+"->\tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
+                    System.out.println("->"+i+"\tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
                     +"\n\tInstrucciones pendientes: "+temporal.getNo_Instrucciones()
                     +"\n\tInstrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n");
                     i++;
@@ -146,12 +146,12 @@ public class ColaProcesos {
             System.out.println();
         
         }
-            
+        /*
         System.out.println("\n ----------------------- Estado de la Memoria -----------------------");
         System.out.println("Marco           Pagina");
         for(i=0;i<64;i++)
             System.out.println(i+"                     "+memoria.marcos[i]);
-
+        */
     }
 
     /**
@@ -167,12 +167,12 @@ public class ColaProcesos {
             for (Proceso temporal : NuevaColaProcesos) {
                 
                 if (i==1) {
-                    System.out.println(i+"->\tNombre: "+temporal.getNombre()+"(Proceso Activo)\n\tID unico: "+temporal.getId_Proc()
+                    System.out.println(i+"  \tNombre: "+temporal.getNombre()+"(Proceso Activo)\n\tID unico: "+temporal.getId_Proc()
                     +"\n\tInstrucciones pendientes: "+temporal.getNo_Instrucciones()
                     +"\n\tInstrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n");
                     i++;
                 } else {
-                    System.out.println(i+"->\tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
+                    System.out.println("->"+i+"\tNombre: "+temporal.getNombre()+"\n\tID unico: "+temporal.getId_Proc()
                     +"\n\tInstrucciones pendientes: "+temporal.getNo_Instrucciones()
                     +"\n\tInstrucciones ejecutadas: "+temporal.getNo_InstruccionesEjecutadas()+"\n");
                     i++;
@@ -250,7 +250,13 @@ public class ColaProcesos {
                 
                 int memLib = temporal.getMemoria();
                 memoria.setCapacidad(memLib + memoria.getCapacidad());
+
+                for(int marco : temporal.tabla_paginas){
+                    memoria.marcos[marco] = null;
+                }
                 
+                temporal.tabla_paginas=null;
+
                 /*
                 int base = temporal.getDirBase();
                 int limite = temporal.getDirLimite();   
@@ -394,6 +400,99 @@ public class ColaProcesos {
             ColaProcesosEliminados.add(temporal);
 
         }
+
+    }
+
+    
+    /*
+     * Nueva funcion. Desfragmentacion y muestra de la lista ligada de procesos y huecos.
+     * 
+    */ 
+    public void desfragmentar_memoria(Memoria RAM) {
+        
+        int j=0;
+        int i;
+        int k;
+        int frame_null;
+
+        System.out.println("\n >>>> Desfragmentando memoria\n");
+        for(int z=0;z<3;z++){
+            System.out.println("..." );
+            try {
+                Thread.sleep(550);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
+        
+        if (NuevaColaProcesos.size()==0) {
+            System.out.println("\n >>>>>>> No hay procesos en memoria \n");
+        } else {
+            
+            for(i=0;i<64;i++){
+
+                if (RAM.marcos[i]==null) {
+                    frame_null = i;
+                    for (k = (i+1); k < RAM.marcos.length; k++) {
+                        if (RAM.marcos[k]!=null) {
+
+                            RAM.marcos[frame_null]=RAM.marcos[k];
+                            RAM.marcos[k]=null;
+
+                            String string = RAM.marcos[frame_null];
+                            String[] parts = string.split(" - ");
+                            
+                            String nombre_proceso = parts[0];
+                            
+                            
+                            String pagina = parts[1]; 
+                            String[] parts2 = pagina.split("Page ");
+                            String numero_pagina = parts2[1];
+                            int num = Integer.parseInt(numero_pagina);
+                            
+                            
+                            for (Proceso temporal : NuevaColaProcesos) {
+
+                                if (nombre_proceso.equals(temporal.getId_Proc())) {
+                                    temporal.tabla_paginas[num]=frame_null;
+                                    break;
+                                }
+                
+                            }
+                            
+                            break;
+                        }
+                        
+                    }
+                }                  
+            } 
+
+            System.out.println("\n ----------------------- NUEVA LISTA LIGADA DE PROCESOS Y HUECOS -----------------------\n");
+            System.out.println("| PROCESO/HUECO | DIRECCION BASE DE LA PAGINA | LONGITUD |---|---> \n");
+            j = 0;
+            for(i=0;i<64;i++){
+
+                switch (i) {
+                    case 0:
+                        System.out.println("    | "+RAM.marcos[i]+" |"+"| 0 | 16 |---|---");
+                        j = j+16;
+                        break;
+
+                    case 63:
+                        System.out.println("--->| "+RAM.marcos[i]+" |"+"| "+j+"| 16 | X |");
+                        break;
+            
+                    default:
+                        System.out.println("--->| "+RAM.marcos[i]+" |"+"| "+j+" | 16 |---|---");
+                        j = j+16;
+                        break;
+                }      
+            
+            }   
+
+        }
+        
+                            
 
     }
 
