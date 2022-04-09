@@ -62,16 +62,27 @@ public class Memoria {
 
             switch (i) {
                 case 0:
-                    System.out.println("    | "+marcos[i]+" |"+"| 0 | 16 |---|---");
+                    if (marcos[i]==null)
+                         System.out.println("    | "+"H"+" |"+"| 0 | 16 |---|---");
+                    else
+                        System.out.println("    | "+marcos[i]+" |"+"| 0 | 16 |---|---");
                     j = j+16;
+                 
+                        
                     break;
 
                 case 63:
-                    System.out.println("--->| "+marcos[i]+" |"+"| "+j+"| 16 | X |");
+                    if (marcos[i]==null)
+                          System.out.println("--->| "+"H"+" |"+"| "+j+"| 16 | X |");
+                    else
+                        System.out.println("--->| "+marcos[i]+" |"+"| "+j+"| 16 | X |");
                     break;
             
                 default:
-                    System.out.println("--->| "+marcos[i]+" |"+"| "+j+" | 16 |---|---");
+                    if (marcos[i]==null)
+                        System.out.println("--->| "+"H"+" |"+"| "+j+" | 16 |---|---");
+                    else
+                        System.out.println("--->| "+marcos[i]+" |"+"| "+j+" | 16 |---|---");
                     j = j+16;
                     break;
             }

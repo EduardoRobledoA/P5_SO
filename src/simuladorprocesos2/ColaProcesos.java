@@ -474,17 +474,26 @@ public class ColaProcesos {
 
                 switch (i) {
                     case 0:
+                        if (RAM.marcos[i]==null)
+                         System.out.println("    | "+"H"+" |"+"| 0 | 16 |---|---");
+                    else
                         System.out.println("    | "+RAM.marcos[i]+" |"+"| 0 | 16 |---|---");
-                        j = j+16;
+                    j = j+16;
                         break;
 
                     case 63:
+                        if (RAM.marcos[i]==null)
+                          System.out.println("--->| "+"H"+" |"+"| "+j+"| 16 | X |");
+                    else
                         System.out.println("--->| "+RAM.marcos[i]+" |"+"| "+j+"| 16 | X |");
                         break;
             
                     default:
+                        if (RAM.marcos[i]==null)
+                        System.out.println("--->| "+"H"+" |"+"| "+j+" | 16 |---|---");
+                    else
                         System.out.println("--->| "+RAM.marcos[i]+" |"+"| "+j+" | 16 |---|---");
-                        j = j+16;
+                    j = j+16;
                         break;
                 }      
             
