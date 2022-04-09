@@ -90,8 +90,8 @@ public class SimuladorProcesos2 {
                         
                     case 9:
                         System.out.println("Has seleccionado la opcion 9");
-                        //RAM.desfragmentar_memoria(QUEUE);
-                        QUEUE.desfragmentar_memoria(RAM);
+                        RAM.desfragmentar_memoria(QUEUE);
+                          
                         break;
                     
                     case 10:
