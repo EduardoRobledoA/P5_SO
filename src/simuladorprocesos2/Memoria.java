@@ -97,10 +97,7 @@ public class Memoria {
     */ 
     public void desfragmentar_memoria(ColaProcesos Q) {
         
-        int j=0;
-        int i;
-        int k;
-        int frame_null;
+        int i,k,frame_null;
 
         System.out.println("\n >>>> Desfragmentando memoria\n");
         for(int z=0;z<3;z++){
